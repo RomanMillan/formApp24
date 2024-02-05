@@ -1,0 +1,122 @@
+<h2>Validaciones Reactivas</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+
+        <form [formGroup]="myForm" (ngSubmit)="submit()">
+
+            <div class="row mb3">
+                <label class="col-sm-3 col-form-label">Nombre</label>
+                <div class="col-sm-9">
+                    <input type="text" 
+                           class="form-control" 
+                           placeholder="Nombre del usuario"
+                           formControlName="name">
+
+                    @if (invalidField('name')) {
+
+                        <span class="form-text text-danger">
+                            Debe ser en formato de nombre y apellido
+                        </span>
+                    }       
+
+
+                </div>
+            </div>
+
+            <div class="row mb3">
+                <label class="col-sm-3 col-form-label">Email</label>
+                <div class="col-sm-9">
+                    <input type="email" 
+                           class="form-control" 
+                           placeholder="Email del usuario"
+                           formControlName="email">
+
+                </div>
+                @if (invalidField('email')) {
+
+                    <span class="form-text text-danger">
+                       {{emailErrorMsg}}
+                    </span>
+                }   
+            </div>
+
+            <div class="row mb3">
+                <label class="col-sm-3 col-form-label">Username</label>
+                <div class="col-sm-9">
+                    <input type="text" 
+                    class="form-control" 
+                    placeholder="Login del usuario"
+                    formControlName="login">
+
+            
+
+                </div>
+                @if (invalidField('login')) {
+
+                    <span class="form-text text-danger">
+                        No puedes utilizar ese login
+                    </span>
+                }   
+            </div>
+
+            <div class="row mb3">
+                <label class="col-sm-3 col-form-label">Contraseña</label>
+                <div class="col-sm-9">
+                    <input type="password" 
+                    class="form-control" 
+                    placeholder="Contraseña del usuario"
+                    formControlName="password">
+                    
+                </div>
+                @if (invalidField('password')) {
+                    <span class="form-text text-danger">
+
+                        La constraseña debe tener 6 caracteres
+                    </span>
+                }
+            </div>
+
+            <div class="row mb3">
+                <label class="col-sm-3 col-form-label">Confirmar contraseña</label>
+                <div class="col-sm-9">
+                    <input 
+                        type="password" 
+                        class="form-control" 
+                        placeholder="Confirmar contraseña del usuario"
+                        formControlName="confirmPassword">
+
+
+                </div>
+                @if (invalidField('confirmPassword')) {
+                    <span class="form-text text-danger">
+
+                        Las constraseñas deben ser iguales
+                    </span>
+                }
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-primary float-end"
+                    >Guardar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<h2>Form Valid: {{ myForm.valid }}</h2>
+<h2>Form Status: {{ myForm.status }}</h2>
+<h2>Form Pending: {{ myForm.pending }}</h2>
+<h2>Form errors: </h2>
+<pre> {{myForm.errors |json}}
+
+<h5>Username</h5>
+<pre> {{myForm.controls['login'].errors | json}}</pre>
+
+<h5>Email</h5>
+<pre>{{ myForm.controls['email'].errors | json }}</pre>
+
+<h5>Confirm password:</h5>
+<pre>{{ myForm.controls['confirmPassword'].errors | json }}</pre>
